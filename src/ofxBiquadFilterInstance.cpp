@@ -1,8 +1,8 @@
-
 //
-//  Biquad.cpp
+//  ofxBiquadFilterInstance.h
 //
-//  Created by Nigel Redmon on 11/24/12
+//  ofxAddon by Nikolaj Møbius (DZL) && Jonas Jongejan (halfdanj)
+//  Original C++ code by Nigel Redmon on 11/24/12
 //  EarLevel Engineering: earlevel.com
 //  Copyright 2012 Nigel Redmon
 //
@@ -18,60 +18,50 @@
 //
 
 #include <math.h>
-#include "biquad.h"
+#include "ofxBiquadFilterInstance.h"
 
-Biquad::Biquad() {
-    type = bq_type_lowpass;
-    a0 = 1.0;
-    a1 = a2 = b1 = b2 = 0.0;
-    Fc = 0.50;
-    Q = 0.707;
-    peakGain = 0.0;
-    z1 = z2 = 0.0;
-}
-
-Biquad::Biquad(int type, double Fc, double Q, double peakGainDB) {
+ofxBiquadFilterInstance::ofxBiquadFilterInstance(ofxBiquadFilterType type, double Fc, double Q, double peakGainDB) {
     setBiquad(type, Fc, Q, peakGainDB);
     z1 = z2 = 0.0;
 }
 
 
-Biquad::~Biquad() {
+ofxBiquadFilterInstance::~ofxBiquadFilterInstance() {
 }
 
-void Biquad::setType(int type) {
+void ofxBiquadFilterInstance::setType(ofxBiquadFilterType type) {
     this->type = type;
     calcBiquad();
 }
 
-void Biquad::setQ(double Q) {
+void ofxBiquadFilterInstance::setQ(double Q) {
     this->Q = Q;
     calcBiquad();
 }
 
-void Biquad::setFc(double Fc) {
+void ofxBiquadFilterInstance::setFc(double Fc) {
     this->Fc = Fc;
     calcBiquad();
 }
 
-void Biquad::setPeakGain(double peakGainDB) {
+void ofxBiquadFilterInstance::setPeakGain(double peakGainDB) {
     this->peakGain = peakGainDB;
     calcBiquad();
 }
 
-void Biquad::setBiquad(int type, double Fc, double Q, double peakGainDB) {
+void ofxBiquadFilterInstance::setBiquad(ofxBiquadFilterType type, double Fc, double Q, double peakGainDB) {
     this->type = type;
     this->Q = Q;
     this->Fc = Fc;
     setPeakGain(peakGainDB);
 }
 
-void Biquad::calcBiquad(void) {
+void ofxBiquadFilterInstance::calcBiquad(void) {
     double norm;
     double V = pow(10, fabs(peakGain) / 20.0);
     double K = tan(M_PI * Fc);
     switch (this->type) {
-        case bq_type_lowpass:
+        case OFX_BIQUAD_TYPE_LOWPASS:
             norm = 1 / (1 + K / Q + K * K);
             a0 = K * K * norm;
             a1 = 2 * a0;
@@ -80,7 +70,7 @@ void Biquad::calcBiquad(void) {
             b2 = (1 - K / Q + K * K) * norm;
             break;
 
-        case bq_type_highpass:
+        case OFX_BIQUAD_TYPE_HIGHPASS:
             norm = 1 / (1 + K / Q + K * K);
             a0 = 1 * norm;
             a1 = -2 * a0;
@@ -89,7 +79,7 @@ void Biquad::calcBiquad(void) {
             b2 = (1 - K / Q + K * K) * norm;
             break;
 
-        case bq_type_bandpass:
+        case OFX_BIQUAD_TYPE_BANDPASS:
             norm = 1 / (1 + K / Q + K * K);
             a0 = K / Q * norm;
             a1 = 0;
@@ -98,7 +88,7 @@ void Biquad::calcBiquad(void) {
             b2 = (1 - K / Q + K * K) * norm;
             break;
 
-        case bq_type_notch:
+        case OFX_BIQUAD_TYPE_NOTCH:
             norm = 1 / (1 + K / Q + K * K);
             a0 = (1 + K * K) * norm;
             a1 = 2 * (K * K - 1) * norm;
@@ -107,7 +97,7 @@ void Biquad::calcBiquad(void) {
             b2 = (1 - K / Q + K * K) * norm;
             break;
 
-        case bq_type_peak:
+        case OFX_BIQUAD_TYPE_PEAK:
             if (peakGain >= 0) {    // boost
                 norm = 1 / (1 + 1/Q * K + K * K);
                 a0 = (1 + V/Q * K + K * K) * norm;
@@ -125,7 +115,7 @@ void Biquad::calcBiquad(void) {
                 b2 = (1 - V/Q * K + K * K) * norm;
             }
             break;
-        case bq_type_lowshelf:
+        case OFX_BIQUAD_TYPE_LOWSHELF:
             if (peakGain >= 0) {    // boost
                 norm = 1 / (1 + sqrt(2) * K + K * K);
                 a0 = (1 + sqrt(2*V) * K + V * K * K) * norm;
@@ -143,7 +133,7 @@ void Biquad::calcBiquad(void) {
                 b2 = (1 - sqrt(2*V) * K + V * K * K) * norm;
             }
             break;
-        case bq_type_highshelf:
+        case OFX_BIQUAD_TYPE_HIGHSHELF:
             if (peakGain >= 0) {    // boost
                 norm = 1 / (1 + sqrt(2) * K + K * K);
                 a0 = (V + sqrt(2*V) * K + K * K) * norm;

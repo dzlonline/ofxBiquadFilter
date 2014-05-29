@@ -39,6 +39,8 @@ public:
 
     //Call this with the value you want to filter on. Outputs the filtered value
     VectorType update(VectorType inputValue);
+    //This is a variant for handling degrees in the case around 0° it will wrap correctly
+    VectorType updateDegree(VectorType inputValue, float circleSize=360);
     
     void setType(ofxBiquadFilterType type);
     void setQ(double Q);
@@ -50,7 +52,7 @@ public:
 
 private:
     int dimensions;
-
+    VectorType lastValue;
 };
 
 

@@ -46,8 +46,46 @@ VectorType ofxBiquadFilter_<VectorType>::update(VectorType inputValue){
         intIt++; outIt++;
     }
 
+    lastValue = inputValue;
     return outValue;
 }
+
+template<class VectorType>
+VectorType ofxBiquadFilter_<VectorType>::updateDegree(VectorType inputValue, float circleSize){
+    VectorType outValue;
+    
+    float * intIt = (float *) &inputValue;
+    float * outIt = (float *) &outValue;
+    float * lastIt = (float *) &lastValue;
+    
+    for(int i=0;i<dimensions;i++){
+        float _inVal = *intIt;
+        
+        while(fabs(_inVal - *lastIt) > circleSize*0.5){
+            if(_inVal > *lastIt){
+                _inVal -= circleSize;
+            }
+            else {
+                _inVal += circleSize;
+            }
+        }
+        
+        *outIt = instances[i].process(_inVal);
+
+        *lastIt = _inVal;
+        
+        while(*outIt < 0){
+            *outIt += circleSize;
+        }
+        while(*outIt > circleSize){
+            *outIt -= circleSize;
+        }
+        intIt++; outIt++; lastIt++;
+    }
+
+    return outValue;
+}
+
 
 template<class VectorType>
 void ofxBiquadFilter_<VectorType>::setType(ofxBiquadFilterType type){

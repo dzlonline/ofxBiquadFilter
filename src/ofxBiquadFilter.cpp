@@ -42,7 +42,9 @@ VectorType ofxBiquadFilter_<VectorType>::update(VectorType inputValue){
     float * intIt = (float *) &inputValue;
     float * outIt = (float *) &outValue;
     for(int i=0;i<dimensions;i++){
-        *outIt = instances[i].process(*intIt);
+        if(!isnan(*intIt)){
+            *outIt = instances[i].process(*intIt);
+        }
         intIt++; outIt++;
     }
 
@@ -72,7 +74,9 @@ VectorType ofxBiquadFilter_<VectorType>::updateDegree(VectorType inputValue, flo
             }
         }
         
-        *outIt = instances[i].process(_inVal);
+        if(!isnan(_inVal)){
+            *outIt = instances[i].process(_inVal);
+        }
 
         *lastIt = _inVal;
         

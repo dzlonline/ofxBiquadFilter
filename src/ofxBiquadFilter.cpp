@@ -47,7 +47,9 @@ VectorType ofxBiquadFilter_<VectorType>::update(VectorType inputValue){
     }
 
     lastValue = inputValue;
-    return outValue;
+
+    _value = outValue;
+    return _value;
 }
 
 template<class VectorType>
@@ -82,8 +84,14 @@ VectorType ofxBiquadFilter_<VectorType>::updateDegree(VectorType inputValue, flo
         }
         intIt++; outIt++; lastIt++;
     }
+    
+    _value = outValue;
+    return _value;
+}
 
-    return outValue;
+template<class VectorType>
+VectorType ofxBiquadFilter_<VectorType>::ofxBiquadFilter_::value(){
+    return _value;
 }
 
 

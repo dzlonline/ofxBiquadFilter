@@ -42,6 +42,8 @@ public:
     //This is a variant for handling degrees in the case around 0° it will wrap correctly
     VectorType updateDegree(VectorType inputValue, float circleSize=360);
     
+    VectorType value();
+    
     void setType(ofxBiquadFilterType type);
     void setQ(double Q);
     void setFc(double Fc);
@@ -53,6 +55,7 @@ public:
 private:
     int dimensions;
     VectorType lastValue;
+    VectorType _value;
 };
 
 

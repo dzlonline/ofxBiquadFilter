@@ -6,17 +6,17 @@ This is a much better way to get nice smooth movements then running average, and
 
 For normal use, the only value that you need to change is the fc value. The fc value is the cutoff frequency, where 1 is the rate you supply new values. So for example, if you supply values 60 times a second (60 fps), then a fc value of 0.5 means the filter will cut off 30hz. 
 
-Created by DZL (http://dzlsevilgeniuslair.blogspot.com/)  &  Jonas Jongejan (http://halfdanj.dk)
+Created by Jonas Jongejan (http://halfdanj.dk) and DZL (http://dzlsevilgeniuslair.blogspot.com/)
 
 Example usage
 ===============
 in the header:
-```
+``` cpp
 ofxBiquadFilter2f filter;
 ```
 
 in the cpp:
-```
+``` cpp
 void setup(){
   filter.setFc(0.1);
 }

@@ -23,9 +23,11 @@
 #include "ofxBiquadFilterInstance.h"
 
 
-//
-// The base template filter
-//
+/*!
+ @class ofxBiquadFilter_
+ @discussion Object that stores the value over time. 
+ It can store multiple dimensions (vec2f, vec3f etc)
+ */
 
 template<class VectorType>
 class ofxBiquadFilter_ {
@@ -37,17 +39,52 @@ public:
                     double peakGainDB=0.0);
     
 
-    //Call this with the value you want to filter on. Outputs the filtered value
+    /*!
+     This will update the filter, 
+     call this continuously 
+     @param inputValue The value you want to filter
+     @return The filtered output value
+    */
     VectorType update(VectorType inputValue);
-    //This is a variant for handling degrees in the case around 0Â° it will wrap correctly
+
+    
+    /*!
+     This is a variant of update for handling degrees in the case around 0 - ° it will wrap correctly
+     @param inputValue The value you want to filter, value between 0 and circleSize
+     @param circleSize The value to wrap at (default 360)
+     @return The filtered output value
+     */
     VectorType updateDegree(VectorType inputValue, float circleSize=360);
     
+    /*!
+     Returns the filtered value
+     */
     VectorType value();
     
+    
+    
+    
+    /*!
+     Set the type of filter, most common types are OFX_BIQUAD_TYPE_LOWPASS and OFX_BIQUAD_TYPE_HIGHPASS
+     */
     void setType(ofxBiquadFilterType type);
-    void setQ(double Q);
+    
+    /*!
+     Set the cut-off frequency. A value of 1 represents the frequence values are being
+     added to the filter, and a value of 0.5 represent the half. For example adding values 
+     every frame 60 frames per second (60Hz), and having a fc value of 0.5, means a cutoff
+     frequency of 30Hz.
+     */
     void setFc(double Fc);
+    
+    /*!
+     Set the Peak Gain value of the filter. Can be used to amplify values, but most usually left at 0.
+     */
     void setPeakGain(double peakGainDB);
+    /*!
+     Overwrite the Q value of the filter. Usually 0.707
+     */
+    void setQ(double Q);
 
     
     vector<ofxBiquadFilterInstance> instances;
@@ -64,7 +101,6 @@ private:
 //
 //The types of filters supported:
 //
-
 typedef ofxBiquadFilter_<float> ofxBiquadFilter1f;
 typedef ofxBiquadFilter_<ofVec2f> ofxBiquadFilter2f;
 typedef ofxBiquadFilter_<ofVec3f> ofxBiquadFilter3f;

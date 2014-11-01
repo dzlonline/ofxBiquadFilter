@@ -43,6 +43,8 @@ void draw(){
 
 ```
 
+### Interactive tool
+You can use this tool to visualize the biquad filters and it's values: http://www.earlevel.com/main/2013/10/13/biquad-calculator-v2/
 
 
 *Created by  [Jonas Jongejan](http://halfdanj.dk) and [DZL](http://dzlsevilgeniuslair.blogspot.com/)*

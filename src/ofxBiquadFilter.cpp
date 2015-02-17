@@ -35,6 +35,15 @@ ofxBiquadFilter_<VectorType>::ofxBiquadFilter_(ofxBiquadFilterType type,
     
 }
 
+
+template<class VectorType>
+void ofxBiquadFilter_<VectorType>::clear(VectorType value){
+    for(int i=0;i<100;i++){
+        update(value);
+    }
+}
+
+
 template<class VectorType>
 VectorType ofxBiquadFilter_<VectorType>::update(VectorType inputValue){
     VectorType outValue;
@@ -51,6 +60,7 @@ VectorType ofxBiquadFilter_<VectorType>::update(VectorType inputValue){
     lastValue = inputValue;
 
     _value = outValue;
+    
     return _value;
 }
 

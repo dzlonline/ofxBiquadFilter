@@ -61,7 +61,10 @@ public:
      */
     VectorType value();
     
-    
+    /*!
+     Clear the value of the filter, and set it to a specific value
+     **/
+    void clear(VectorType clearValue);    
     
     
     /*!

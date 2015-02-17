@@ -53,7 +53,8 @@ void ofxBiquadFilterInstance::setBiquad(ofxBiquadFilterType type, double Fc, dou
     this->type = type;
     this->Q = Q;
     this->Fc = Fc;
-    setPeakGain(peakGainDB);
+    this->peakGain = peakGainDB;
+    calcBiquad();
 }
 
 void ofxBiquadFilterInstance::calcBiquad(void) {

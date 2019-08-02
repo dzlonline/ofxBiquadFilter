@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "example_mouse.app"
-               BlueprintName = "example_mouse"
-               ReferencedContainer = "container:example_mouse.xcodeproj">
+               BuildableName = "example_graph.app"
+               BlueprintName = "example_graph"
+               ReferencedContainer = "container:example_graph.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "example_mouse.app"
-            BlueprintName = "example_mouse"
-            ReferencedContainer = "container:example_mouse.xcodeproj">
+            BuildableName = "example_graph.app"
+            BlueprintName = "example_graph"
+            ReferencedContainer = "container:example_graph.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "example_mouse.app"
-            BlueprintName = "example_mouse"
-            ReferencedContainer = "container:example_mouse.xcodeproj">
+            BuildableName = "example_graph.app"
+            BlueprintName = "example_graph"
+            ReferencedContainer = "container:example_graph.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "example_mouse.app"
-            BlueprintName = "example_mouse"
-            ReferencedContainer = "container:example_mouse.xcodeproj">
+            BuildableName = "example_graph.app"
+            BlueprintName = "example_graph"
+            ReferencedContainer = "container:example_graph.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

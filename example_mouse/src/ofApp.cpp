@@ -23,20 +23,20 @@ void ofApp::draw(){
     
     //Input value
     ofSetColor(255, 255, 255,100);
-    ofCircle(mouseX, mouseY, 40);
+    ofDrawCircle(mouseX, mouseY, 40);
     
     
     //High pass value
     ofSetColor(30,30,255,100);
     ofPushMatrix();
     ofTranslate(ofGetWidth()*0.5, ofGetHeight()*0.5);
-    ofCircle(filterHighPass.value().x, filterHighPass.value().y, 30);
+    ofDrawCircle(filterHighPass.value().x, filterHighPass.value().y, 30);
     ofPopMatrix();
 
     
     // Low pass value
     ofSetColor(255,30,30,100);
-    ofCircle(filterLowPass.value().x, filterLowPass.value().y, 30);
+    ofDrawCircle(filterLowPass.value().x, filterLowPass.value().y, 30);
     
     ofSetColor(255, 255, 255);
     ofDrawBitmapString("FC: "+ofToString(fc)+" (up/down arrow to change)", ofPoint(10,20));
